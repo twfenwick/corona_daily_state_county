@@ -6,7 +6,7 @@ import pandas
 path_counties = '/Users/tim/code/github/nytimes/covid-19-data/us-counties.csv'
 path_states = '/Users/tim/code/github/nytimes/covid-19-data/us-states.csv'
 
-cmdln_override = True
+cmdln_override = False
 config_d = False
 config_od = True
 
@@ -25,7 +25,11 @@ def pandafunc(state='North Carolina', county=None, deaths=False, only_deaths=Fal
     df = pandas.read_csv(path)
 
     df = df[df['state'].isin(match)]
-    df = df[df['county'].isin(match)] if county else df
+    if county:
+        df = df[df['county'].isin(match)]
+        title = f'{county} County, {state}'
+    else:
+        title = state
 
     if cmdln_override:
         only_deaths = config_od
@@ -38,7 +42,7 @@ def pandafunc(state='North Carolina', county=None, deaths=False, only_deaths=Fal
     else:
         count = 'cases'
 
-    df.plot(kind='bar', x='date', y=count, grid=True)
+    df.plot(kind='bar', x='date', y=count, grid=True, title=title)
     plt.show()
     plt.close()
 
