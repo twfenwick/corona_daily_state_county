@@ -1,2 +1,4 @@
 pandas
 matplotlib
+plotly
+chart_studio

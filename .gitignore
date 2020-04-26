@@ -1,0 +1,5 @@
+!.gitignore
+.idea/**
+corona_tracker.iml
+plotlyplay.py
+index.html
